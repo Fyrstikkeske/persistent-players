@@ -89,13 +89,10 @@ public class PersistentPlayerEntity extends EntityMob {
             e.printStackTrace();
         }
         getActivePotionEffects().forEach(player::addPotionEffect);
-        player.setPositionAndRotation(posX, posY, posZ, rotationYaw, rotationPitch);
-        player.rotationYaw = rotationYaw;
-        player.prevRotationYaw = prevRotationYaw;
-        player.rotationPitch = rotationPitch;
-        player.prevRotationPitch = prevRotationPitch;
-        player.rotationYawHead = rotationYawHead;
-        player.prevRotationYawHead = prevRotationYawHead;
+        player.connection.setPlayerLocation(posX, posY, posZ, rotationYaw, rotationPitch);
+        player.getServerWorld().getMinecraftServer().addScheduledTask(() -> {
+            player.setPositionAndUpdate(posX, posY, posZ);
+        });
     }
 
     public static byte getModel(EntityPlayer player) {
