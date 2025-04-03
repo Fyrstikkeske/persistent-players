@@ -50,10 +50,16 @@ public class PlayerEvents {
     @SubscribeEvent(priority = EventPriority.NORMAL)
     public void playerLogOut(PlayerEvent.PlayerLoggedOutEvent event) {
         if (!(event.player instanceof EntityPlayerMP)) {
+            if (Config.betterLogging) {
+                Log.e("Entity is not EntityPlayerMP.");
+            }
             return;
         }
         EntityPlayerMP player = (EntityPlayerMP) event.player;
         if (!shouldPersist(player)) {
+            if (Config.betterLogging) {
+                Log.e("Player is not Persistant player");
+            }
             return;
         }
         player.dismountRidingEntity();

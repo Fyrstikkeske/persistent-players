@@ -3,6 +3,7 @@ package de.maxhenkel.persistentplayers.entities;
 import com.google.common.base.Optional;
 import com.mojang.authlib.GameProfile;
 import de.maxhenkel.persistentplayers.Config;
+import de.maxhenkel.persistentplayers.Log;
 import de.maxhenkel.persistentplayers.proxy.CommonProxy;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -71,6 +72,7 @@ public class PersistentPlayerEntity extends EntityMob {
             Field fire = ObfuscationReflectionHelper.findField(Entity.class, "field_190534_ay");
             persistentPlayer.setFire((Integer) fire.get(player));
         } catch (Exception e) {
+            Log.e("Unable to set player on fire on join");
             e.printStackTrace();
         }
         player.getActivePotionEffects().forEach(persistentPlayer::addPotionEffect);

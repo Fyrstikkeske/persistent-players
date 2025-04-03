@@ -24,8 +24,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class PlayerRenderer extends RenderLivingBase<PersistentPlayerEntity> {
 
-    private ModelPlayer playerModel;
-    private ModelPlayer playerModelSmallArms;
+    private final ModelPlayer playerModel;
+    private final ModelPlayer playerModelSmallArms;
 
     private static final Map<UUID, GameProfile> PROFILE_CACHE = new ConcurrentHashMap<>();
     private static final Set<UUID> PENDING_FETCHES = ConcurrentHashMap.newKeySet();
